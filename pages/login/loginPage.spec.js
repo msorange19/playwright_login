@@ -1,6 +1,8 @@
-exports.loginPage = class loginPage {
+const {basePage} = require('../base/basePage.spec');
+
+exports.loginPage = class loginPage extends basePage{
     constructor(page) {
-        this.page = page;
+        super(page);
         this.usernameInput = '#user_name_input';
         this.passwordInput = '#password_input';
         this.submitButton = '#login_submit_button';
