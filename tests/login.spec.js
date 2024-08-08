@@ -7,21 +7,21 @@ const testData = JSON.parse(JSON.stringify(require('../config/auth.json')));
 
 
 //let page;
-describe('loginPage', () => {
+describe('@loginPage Sanity testing', () => {
 
     test.beforeEach(async ({loginObj}) => {
         //page = await browser.newPage()
         await loginObj.goToLoginPage("https://admin.stg.raenabeauty.com/#/login");
     })
 
-    test('Verify login without username',async ({loginObj,page}) => {
+    test('@Verify login without username',async ({loginObj,page}) => {
 
         await loginObj.verifyLogin( '' , testData.password);
         const expectedText = page.locator(loginObj.userNameError);
         await expect(expectedText).toHaveText(testData.missingError);
     })
 
-    test('verify login with valid email and password ',  async ({loginObj,page}) => {
+    test('@verify login with valid email and password ',  async ({loginObj,page}) => {
         await loginObj.verifyLogin(testData.email, testData.password);
         const expectedName = page.locator(loginObj.userName);
         await expect(expectedName).toHaveText(testData.email);
