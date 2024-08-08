@@ -16,7 +16,6 @@ exports.loginPage = class loginPage extends basePage{
     }
     async verifyLogin(email, pass)
     {
-        await this.page.pause();
         await this.page.click(this.usernameInput);
         await this.page.fill(this.usernameInput,email);
         await this.page.click(this.passwordInput);
