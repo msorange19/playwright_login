@@ -21,5 +21,5 @@ exports.loginPage = class loginPage {
         await this.page.fill(this.passwordInput,pass);
         await this.page.click(this.submitButton);
     }
-    as
+    
 }
