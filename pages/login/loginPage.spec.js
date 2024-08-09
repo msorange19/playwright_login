@@ -16,11 +16,21 @@ exports.loginPage = class loginPage extends basePage{
     }
     async verifyLogin(email, pass)
     {
+        await this.page.pause();
         await this.page.click(this.usernameInput);
         await this.page.fill(this.usernameInput,email);
         await this.page.click(this.passwordInput);
         await this.page.fill(this.passwordInput,pass);
         await this.page.click(this.submitButton);
     }
-    
+    async verifyLoginEmailFieldMissingError()
+    {
+        await this.page.pause();
+        return this.userNameError;
+    }
+    async verifyLoginPasswordFieldMissingError()
+    {
+        return this.page.locator(this.passwordError)
+    }
+
 }

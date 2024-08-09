@@ -16,15 +16,19 @@ describe('@loginPage Sanity testing', () => {
 
     test('@Verify login without username',async ({loginObj,page}) => {
 
-        await loginObj.verifyLogin( '' , testData.password);
-        const expectedText = page.locator(loginObj.userNameError);
-        await expect(expectedText).toHaveText(testData.missingError);
+        await loginObj.verifyLogin( '' , testData.userData.password);
+      //  const expectedText = page.locator(loginObj.userNameError);
+        const emailErrorLocator = await loginObj.verifyLoginEmailFieldMissingError();
+        const expectedValidationErrorText = page.locator(emailErrorLocator);
+      //  const text = await expectedText.innerText()
+       // console.log(text)
+        await expect(expectedValidationErrorText).toHaveText(testData.validationError.missingError);
     })
 
     test('@verify login with valid email and password ',  async ({loginObj,page}) => {
-        await loginObj.verifyLogin(testData.email, testData.password);
-        const expectedName = page.locator(loginObj.userName);
-        await expect(expectedName).toHaveText(testData.email);
+        await loginObj.verifyLogin(testData.userData.email, testData.userData.password);
+        const expectedUserName = page.locator(loginObj.userName);
+        await expect(expectedUserName).toHaveText(testData.userData.email);
     })
 })
 
