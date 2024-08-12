@@ -25,12 +25,15 @@ exports.loginPage = class loginPage extends basePage{
     }
     async verifyLoginEmailFieldMissingError()
     {
-        await this.page.pause();
         return this.userNameError;
     }
     async verifyLoginPasswordFieldMissingError()
     {
-        return this.page.locator(this.passwordError)
+        return this.passwordError
+    }
+    async verifyVisibleUserName()
+    {
+        return this.userName
     }
 
 }

@@ -17,7 +17,6 @@ describe('@loginPage Sanity testing', () => {
     test('@Verify login without username',async ({loginObj,page}) => {
 
         await loginObj.verifyLogin( '' , testData.userData.password);
-      //  const expectedText = page.locator(loginObj.userNameError);
         const emailErrorLocator = await loginObj.verifyLoginEmailFieldMissingError();
         const expectedValidationErrorText = page.locator(emailErrorLocator);
       //  const text = await expectedText.innerText()
@@ -27,7 +26,10 @@ describe('@loginPage Sanity testing', () => {
 
     test('@verify login with valid email and password ',  async ({loginObj,page}) => {
         await loginObj.verifyLogin(testData.userData.email, testData.userData.password);
-        const expectedUserName = page.locator(loginObj.userName);
+        const visibleUserName = await loginObj.verifyVisibleUserName();
+        const expectedUserName = page.locator(visibleUserName);
+        const text = await expectedUserName.innerText()
+        console.log(text)
         await expect(expectedUserName).toHaveText(testData.userData.email);
     })
 })
