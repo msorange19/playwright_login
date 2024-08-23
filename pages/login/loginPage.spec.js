@@ -7,8 +7,9 @@ exports.loginPage = class loginPage extends basePage{
         this.passwordInput = '#password_input';
         this.submitButton = '#login_submit_button';
         this.userName = "//*[@id=\"top_menu\"]/div/div[1]";
-        this.userNameError = "//*[@id=\"app\"]/div/div[2]/div[2]/form/div[1]/div/div[2]/div[2]";
-        this.passwordError = "//*[@id=\"app\"]/div/div[2]/div[2]/form/div[2]/div/div[2]/div[2]";
+        this.userNameError = "(//div[@class='MuiGrid-root errorWrapper error MuiGrid-item MuiGrid-grid-xs-12'])[1]";
+        this.passwordError = '//*[@id="app"]/div/div[2]/div[2]/form/div[2]/div/div[2]/div[2]';
+        this.incorrectError = '//*[@id="app"]/div/div[2]/div[3]/div/div/div'
     }
 
     async goToLoginPage(url) {
@@ -16,7 +17,7 @@ exports.loginPage = class loginPage extends basePage{
     }
     async verifyLogin(email, pass)
     {
-        await this.page.pause();
+       // await this.page.pause();
         await this.page.click(this.usernameInput);
         await this.page.fill(this.usernameInput,email);
         await this.page.click(this.passwordInput);
@@ -29,11 +30,19 @@ exports.loginPage = class loginPage extends basePage{
     }
     async verifyLoginPasswordFieldMissingError()
     {
-        return this.passwordError
+        await this.page.pause()
+        return this.passwordError;
+    }
+    async verifyIncorrectError()
+    {
+        return this.incorrectError;
     }
     async verifyVisibleUserName()
     {
-        return this.userName
+        return this.userName;
     }
+
+
+
 
 }

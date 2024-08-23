@@ -1,0 +1,7 @@
+TAP version 13
+# Subtest: @loginPage Sanity testing
+ok 1 - @loginPage Sanity testing
+  ---
+  duration_ms: 3.647
+  type: 'suite'
+  ...
